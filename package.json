@@ -1,6 +1,6 @@
 {
   "name": "aileen-httpd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Httpd Plugin For Aileen Framework",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "aileen-annotation": "^0.2.5",
-    "aileen-core": "^0.1.0",
+    "aileen-core": ">=0.2.0",
     "boolean": "^3.0.2",
     "co-body": "^6.1.0",
     "koa": "^2.13.1",
