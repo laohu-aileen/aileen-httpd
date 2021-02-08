@@ -15,6 +15,7 @@ import { ResponseAnnotation } from "../annotation/response";
 import { RouterBean } from "../injector";
 import { BadRequestError } from "./error";
 import { RouteNoFoundExceptionHandlerAnnotation } from "../annotation/controller";
+import { Application, ApplicationBean } from "aileen-core";
 
 /**
  * 类型转换器
@@ -52,6 +53,12 @@ export class Router {
    * 解析引擎
    */
   protected engine = new Trouter<Route>();
+
+  /**
+   * 应用对象
+   */
+  @ApplicationBean.Injector
+  protected application: Application;
 
   /**
    * 路由不存在处理
@@ -156,6 +163,7 @@ export class Router {
    */
   public async handler(ctx: Context) {
     const { handlers, params } = this.engine.find(<any>ctx.method, ctx.path);
+    ctx.application = this.application;
     if (handlers.length) return await handlers[0].exec(ctx, params);
     if (this.routeNoFoundHandle) await this.routeNoFoundHandle(ctx);
   }
